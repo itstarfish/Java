@@ -1,19 +1,9 @@
 public class uzduotis {
     public static void main(String[] args) {
-        printConversion(10.25);
-    }
-    public static long toMilesPerHour (double kilometersPerHour){
-        if(kilometersPerHour < 0) return -1;
-        else {
-            return Math.round((kilometersPerHour/1.609));
-        }
-    }
-    public static void printConversion(double kilometersPerHour){
-        if (kilometersPerHour < 0)
-            System.out.println("Invalid Value");
-        else {
-            long milesPerHour = toMilesPerHour(kilometersPerHour);
-            System.out.println(kilometersPerHour + " km/h = " + milesPerHour + " mi/h");
-        }
+        String hello = "Hello World";
+        double firstNumber = 56.68896;
+        String again = "Hello world again";
+        double topNumber = 34.7778;
+        System.out.printf("%s %.2f %s %.3f",hello,firstNumber,again,topNumber);
     }
 }
