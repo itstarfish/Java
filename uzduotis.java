@@ -1,51 +1,43 @@
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class uzduotis {
     public static void main(String[] args) {
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Iveskite tekstą: ");
-        StringBuilder demoText = new StringBuilder(scanner.nextLine());
-        System.out.println(demoText);
-        scanner.close();
-        int words = 0;
-        int symbols = 0;
-
-        char mostCommonSymbol = ' ';
-        int mostCommonOccurrence = 0;
-
-        for (int index = 0;index < demoText.length();index++){
-            // 2.Simbolių skaičius: Nuskaito tekstą ir paskaičiuoja, kiek jame yra simbolių (įskaitant tarpų ir specialių simbolių).
-            symbols++;
-            //1. Žodžių skaičius paskaičiuoja, kiek jame yra žodžių.
-            if (words == 0 && demoText.charAt(index) != ' '){
-                words++;
+        int[] numbers = {7,1,2,9,9,7,2,1};
+        System.out.println("has22: " + has22(numbers));
+        System.out.println("maxMirror: "+ maxMirror(numbers));
+    }
+    public static int maxMirror(int[] numbers){
+        int maxLength = 0;
+        //Array ---->
+        for (int i = 0; i < numbers.length; i++) {
+            //Array <----
+            for (int j = numbers.length - 1; j >= 0; j--) {
+                int tempLength = 0;
+                //Array --->  <  length
+                while ((i + tempLength < numbers.length)
+                        //&& Array <----  >=  0
+                        && (j - tempLength >= 0)
+                        //&& Array ---->  ==  <----
+                        && (numbers[i + tempLength]) == (numbers[j - tempLength])) {
+                    System.out.println("----> "+ numbers[i + tempLength] + " <---- " + numbers[j - tempLength] + " maxLength: " + maxLength + " tempLength: " + (tempLength+1));
+                    //Increase tempLength
+                    tempLength++;
+                }
+                if (tempLength > maxLength) maxLength = tempLength;
             }
-            if (demoText.charAt(index) == ' '&& demoText.charAt(index+1)!=' '){
-                words++;
-            }
-            // 3. Dažniausiai pasikartojantis simbolis: Randa dažniausiai pasikartojantį simbolį tekste.
-            if (demoText.charAt(index) != mostCommonSymbol) {
-                int mostCommonTemp = 0;
-                for (int secondIndex = 0; secondIndex < demoText.length(); secondIndex++) {
-                    // Tikrina kiek dažnai dabartinis simbolis pasikartoja tekste
-                    if (demoText.charAt(index) == demoText.charAt(secondIndex)) {
-                        mostCommonTemp++;
-                    }
-                    // Jei pasikartoja dažniau nei dažniausiai pasitaikantis, jis priskiriamas dažniausiai pasitaikančiam
-                    if (mostCommonTemp > mostCommonOccurrence) {
-                        mostCommonOccurrence = mostCommonTemp;
-                        mostCommonSymbol = demoText.charAt(index);
-                    }
+        }
+        return maxLength;
+    }
+    public static boolean has22(int[] numbers){
+        //Array ---->
+        for (int i = 0; i < numbers.length; i++){
+            if (i < numbers.length-1){
+                if (numbers[i] == numbers[i+1]){
+                    return true;
                 }
             }
         }
-        System.out.printf("Tekste yra %d simbolių \n",symbols);
-        System.out.printf("Tekste yra %d žodžių \n",words);
-        System.out.printf("Tekste dažniausiai pasitaiko \"%s\" simbolis \n", mostCommonSymbol);
-        System.out.printf("Tekste šis simbolis pasitaiko %d kartų \n",mostCommonOccurrence);
-        demoText.reverse();
-        System.out.printf("Visas tekstas atvirkščiai: %s",demoText);
-
-
+        return false;
     }
 }
