@@ -1,26 +1,52 @@
+import java.util.Date;
 public class Main {
     public static void main(String[] args) {
-        // Create MyPoint objects
-        MyPoint p1 = new MyPoint(0, 0);
-        MyPoint p2 = new MyPoint(3, 4);
+        Customer c1 = new Customer("Jonas");
+        c1.setMember(true);
+        c1.setMemberType("Premium");
 
-        // Create MyLine objects using MyPoint objects
-        MyLine line1 = new MyLine(p1, p2);
-        System.out.println("Line1: " + line1);
-        System.out.println("Length of Line1: " + line1.getLength());
-        System.out.println("Gradient of Line1: " + line1.getGradient());
+        Customer c2 = new Customer("Tadas");
+        c2.setMember(true);
+        c2.setMemberType("Gold");
 
-        // Create MyLine objects using coordinates
-        MyLine line2 = new MyLine(1, 1, 4, 5);
-        System.out.println("Line2: " + line2);
-        System.out.println("Length of Line2: " + line2.getLength());
-        System.out.println("Gradient of Line2: " + line2.getGradient());
+        Customer c3 = new Customer("Simas");
+        c3.setMember(false);
 
-        // Test setters and getters
-        line1.setBegin(new MyPoint(2, 2));
-        line1.setEnd(new MyPoint(5, 6));
-        System.out.println("Updated Line1: " + line1);
-        System.out.println("Updated Length of Line1: " + line1.getLength());
-        System.out.println("Updated Gradient of Line1: " + line1.getGradient());
+        Visit v1 = new Visit(c1.getName(), new Date());
+        v1.setServiceExpense(100);
+        v1.setProductExpense(50);
+
+        Visit v2 = new Visit(c2.getName(), new Date());
+        v2.setServiceExpense(100);
+        v2.setProductExpense(50);
+
+        Visit v3 = new Visit(c3.getName(), new Date());
+        v3.setServiceExpense(100);
+        v3.setProductExpense(50);
+
+        System.out.println("Total expense for " + c1.getName() + ": " + Total(v1, c1));
+        System.out.println("Total expense for " + c2.getName() + ": " + Total(v2, c2));
+        System.out.println("Total expense for " + c3.getName() + ": " + Total(v3, c3));
+    }
+
+    public static double Total(Visit visit, Customer customer) {
+        DiscountRate discountRate = new DiscountRate();
+        double serviceDiscount;
+        if (customer.isMember()) {
+            serviceDiscount = discountRate.getServiceDiscountRate(customer.getMemberType());
+        } else {
+            serviceDiscount = 0;
+        }
+
+        double productDiscount;
+        if (customer.isMember()) {
+            productDiscount = discountRate.getProductDiscountRate(customer.getMemberType());
+        } else {
+            productDiscount = 0;
+        }
+        double totalServiceExpense = visit.getServiceExpense() * (1 - serviceDiscount);
+        double totalProductExpense = visit.getProductExpense() * (1 - productDiscount);
+
+        return totalServiceExpense + totalProductExpense;
     }
 }
