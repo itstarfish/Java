@@ -8,4 +8,9 @@ public class BWCartridge implements ICartridge {
     public String getFiller() {
         return "50%";
     }
+
+    @Override
+    public String printColor() {
+        return null;
+    }
 }
