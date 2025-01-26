@@ -1,0 +1,44 @@
+import java.util.ArrayList;
+
+public class Student {
+    private String name;
+    private String lastName;
+    private ArrayList<Subject> subjects = new ArrayList<>();
+
+    public Student(String name, String lastName) {
+        this.name = name;
+        this.lastName = lastName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public ArrayList<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void addSubject(Subject subject) {
+        this.subjects.add(subject);
+    }
+
+    @Override
+    public String toString() {
+        String output = name + " " + lastName;
+        return output;
+    }
+
+
+}
