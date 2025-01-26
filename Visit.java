@@ -30,6 +30,9 @@ public class Visit {
         this.productExpense = productExpense;
     }
 
+    public double getTotalExpense(){
+        return serviceExpense+productExpense;
+    }
     @Override
     public String toString(){
         return "Visit[Date="+date+",serviceExpence="+serviceExpense+",productExpence="+productExpense+"]";
