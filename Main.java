@@ -6,12 +6,13 @@ public class Main {
         Subject sj2 = new Subject("Anglu");
         Subject sj3 = new Subject("Lietuviu");
 
+
         Student s1 = new Student("Jonas", "Jonaitis");
         Student s2 = new Student("Algis", "Algaitis");
 
 
         s1.getSubjects().sort(null);
-
+        
         System.out.println(s1.toString());
         for (Subject temp:s1.getSubjects()) {
             System.out.println(temp.toString());
