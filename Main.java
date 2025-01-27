@@ -1,5 +1,6 @@
 public class Main {
     public static void main(String[] args) {
+        /*
         new Product("A100","apple","local",Category.PRODUCE);
         new Product("B100","banana","local",Category.PRODUCE);
         new Product("P100","pear","local",Category.PRODUCE);
@@ -15,6 +16,13 @@ public class Main {
         new Product("BC77","coke","coca cola",Category.BEVERAGE);
         new Product("BC88","coffee","value",Category.BEVERAGE);
         new Product("BC99","tea","herbal",Category.BEVERAGE);
+
+        */
+        System.out.println("All available categories:");
+        for (Category category:Category.values()) {
+            System.out.println(category.getCategoryName());
+        }
+
 
 
     }

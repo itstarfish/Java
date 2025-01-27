@@ -1,7 +1,16 @@
 public enum Category {
-    PRODUCE,
-    DAIRY,
-    CEREAL,
-    MEAT,
-    BEVERAGE;
+    PRODUCE("Produce"),
+    DAIRY("Diary"),
+    CEREAL("Cereal"),
+    MEAT("Meat"),
+    BEVERAGE("Beverage");
+
+    private String categoryName;
+    private Category(String name) {
+        this.categoryName = name;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
 }
