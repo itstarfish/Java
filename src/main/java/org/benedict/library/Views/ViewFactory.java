@@ -13,6 +13,10 @@ import java.util.concurrent.ExecutionException;
 public class ViewFactory {
     private final ObjectProperty<MenuItems> userSelectedMenuItem;
     private AnchorPane dashboard;
+    private AnchorPane authorsView;
+    private AnchorPane createAuthorView;
+    private AnchorPane booksView;
+    private AnchorPane addBookView;
 
     public ViewFactory(){
         this.userSelectedMenuItem = new SimpleObjectProperty<>();
@@ -70,6 +74,70 @@ public class ViewFactory {
         createStage(loader);
 
     }
+
+    /**
+     * Load and return authors view
+     *
+     * @return authorsView
+     */
+    public AnchorPane getAuthorsView(){
+        if(authorsView == null){
+            try{
+                authorsView = new FXMLLoader(getClass().getResource("/Fxml/Authors.fxml")).load();
+            } catch (Exception e){
+                System.out.println(e);
+            }
+        }
+        return authorsView;
+    }
+
+    /**
+     * Load and return create author view
+     *
+     * @return createAuthorView
+     */
+    public AnchorPane getCreateAuthorView(){
+        if(createAuthorView == null){
+            try{
+                createAuthorView = new FXMLLoader(getClass().getResource("/Fxml/CreateAuthor.fxml")).load();
+            } catch (Exception e){
+                System.out.println(e);
+            }
+        }
+        return createAuthorView;
+    }
+    /**
+     * Load and return books view
+     *
+     * @return booksView
+     */
+    public AnchorPane getBooksView(){
+        if(booksView == null){
+            try{
+                booksView = new FXMLLoader(getClass().getResource("/Fxml/Books.fxml")).load();
+            } catch (Exception e){
+                System.out.println(e);
+            }
+        }
+        return booksView;
+    }
+
+    /**
+     * Load and return add book view
+     *
+     * @return addBookView
+     */
+    public AnchorPane getAddBookView(){
+        if(addBookView == null){
+            try{
+                addBookView = new FXMLLoader(getClass().getResource("/Fxml/AddBook.fxml")).load();
+            } catch (Exception e){
+                System.out.println(e);
+            }
+        }
+        return addBookView;
+    }
+
 
     /*
     * Create and display  new stage.

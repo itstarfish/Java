@@ -28,8 +28,10 @@ public class RegisterController implements Initializable {
         Stage stage = (Stage) register_btn.getScene().getWindow();
 
         //Check if password match
-
-        if(!UserUtility.doPasswordsMatch(password_fld.getText(),repeat_password_field.getText())){
+        if (Model.getInstance().isUserExist(user_name_field.getText())){
+            AlertUtility.displayError("Vartotojas, tokiu vardu sistemoje jau registruotas");
+            this.emptyFields();
+        } else if(!UserUtility.doPasswordsMatch(password_fld.getText(),repeat_password_field.getText())){
             AlertUtility.displayError("Nesutampa slaptažodžiai");
         }else{
             Model.getInstance().createUser(user_name_field.getText(), password_fld.getText());
@@ -44,5 +46,13 @@ public class RegisterController implements Initializable {
 
 
 
+    }
+    /**
+     * Empty form fields
+     */
+    public void emptyFields(){
+        user_name_field.setText("");
+        password_fld.setText("");
+        repeat_password_field.setText("");
     }
 }
