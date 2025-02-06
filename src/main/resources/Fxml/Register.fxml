@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../Styles/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="org.benedict.library.Controllers.RegisterController">
+    <children>
+        <VBox prefHeight="400.0" prefWidth="200.0" styleClass="login_logo_container">
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="KITM" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Knygynas" />
+            </children>
+        </VBox>
+        <VBox layoutX="224.0" layoutY="50.0" prefHeight="352.0" prefWidth="350.0" styleClass="login_form_container" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <children>
+                <Label styleClass="title_label" text="Registracija" />
+                <Label text="Vartotojas">
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
+                </Label>
+                <TextField fx:id="user_name_field" />
+                <Label text="Slaptažodis">
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
+                </Label>
+                <PasswordField fx:id="password_fld" />
+            <Label layoutX="10.0" layoutY="118.0" text="Pakartokite slaptažodį">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Label>
+            <PasswordField fx:id="repeat_password_field" layoutX="10.0" layoutY="135.0" />
+                <Button fx:id="register_btn" mnemonicParsing="false" text="Registruotis">
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
+                </Button>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
