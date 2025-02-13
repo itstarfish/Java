@@ -29,7 +29,7 @@ public class BookDAO implements genericDAO{
             stmt.setString(1, isbn);
             stmt.setString(2, title);
             stmt.setString(3,category);
-            stmt.setString(4,description);
+            stmt.setString(4, description);
             stmt.setInt(5, page_number);
             stmt.setString(6, publish_date);
             stmt.setDouble(7, price);
@@ -45,18 +45,58 @@ public class BookDAO implements genericDAO{
 
     @Override
     public void update(Object entity) {
+        if (!(entity instanceof Book)){
+            throw new IllegalArgumentException("Excepted Book object");
+        }
 
+        Book book = (Book) entity;
+
+        String sql = "UPDATE books SET ISBN = ?, Title = ?, Category = ?, Description = ?, Page_Number = ?, Publish_Date = ?, Price = ?, Author = ? WHERE id = ?";
+
+        try(PreparedStatement stmt = this.conn.prepareStatement(sql)){
+            stmt.setString(1, book.getIsbn());
+            stmt.setString(2, book.getTitle());
+            stmt.setString(3, book.getCategory());
+            stmt.setString(4, book.getDescription());
+            stmt.setInt(5, book.getPage_number());
+            stmt.setString(6, book.getPublish_date());
+            stmt.setDouble(7, book.getPrice());
+            stmt.setInt(8, book.getAuthor());
+            stmt.setInt(9, book.getId());
+
+            int rowsUpdated = stmt.executeUpdate();
+            if (rowsUpdated > 0){
+                logger.info("Book updated "+ book);
+            } else{
+                logger.warning("No book found with id: " + book.getId());
+            }
+
+        }catch (SQLException e ){
+            logger.severe("Error updating book: "+ e.getMessage());
+        }
     }
 
     @Override
-    public void delete(Object id) {
+    public void delete(int id) {
+        String sql = "DELETE FROM books WHERE id = ?";
+        try(PreparedStatement stmt = this.conn.prepareStatement(sql)){
+            stmt.setInt(1, id);
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected > 0){
+                logger.info("Book with ID" + id + " was deleted successfully");
+            } else {
+                logger.info("No book found with ID " + id);
+            }
+        }catch (SQLException e){
+            logger.severe("Error deleting book: " + e.getMessage());
+        }
 
     }
 
     @Override
     public ObservableList<Book> findAll(){
         ObservableList<Book> books = FXCollections.observableArrayList();
-        String sql = "SELECT id, FirstName, LastName, Email, City FROM authors";
+        String sql = "SELECT id, ISBN, Title, Category, Description, Page_Number, Publish_Date, Price, Author FROM books";
 
         try(PreparedStatement stmt = this.conn.prepareStatement(sql)){
             ResultSet resultSet = stmt.executeQuery();

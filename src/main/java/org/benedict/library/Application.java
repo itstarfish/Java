@@ -14,8 +14,6 @@ public class Application extends javafx.application.Application {
            AlertUtility.displayInformation("Prieš pradedant darbą su sistema turite sukurti vartotoją");
            Model.getInstance().getViewFactory().showRegsiterWindow();
        }
-
-
     }
 
     public static void main(String[] args) {

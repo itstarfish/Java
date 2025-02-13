@@ -27,7 +27,7 @@
          <contextMenu>
             <ContextMenu>
               <items>
-                <MenuItem fx:id="remove_author" mnemonicParsing="false" text="Šalinti" />
+                <MenuItem fx:id="remove_book" mnemonicParsing="false" text="Šalinti" />
               </items>
             </ContextMenu>
          </contextMenu>

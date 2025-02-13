@@ -8,6 +8,8 @@ import org.benedict.library.dao.UserDAO;
 
 import javax.swing.text.View;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 public class Model {
@@ -143,6 +145,56 @@ public class Model {
     }
 
     /**
+     * Retrieve all author ids from DB
+     *
+     * @return arraylist with author ids
+     */
+    public ArrayList<Integer> getAuthorIds(){
+        ArrayList<Integer> authorIds = new ArrayList<>();
+        for (Author author:getAuthors()) {
+            authorIds.add(author.getId());
+        }
+        return authorIds;
+    }
+
+
+    /**
+     * Delete author from DB by id
+     *
+     * @param id the ID author
+     */
+    public void deleteAuthor(int id){
+        authorDAO.delete(id);
+    }
+
+    /**
+     * Update existing author in the database
+     */
+
+    public void updateAuthor(Author author){
+        authorDAO.update(author);
+    }
+
+
+    /**
+     * Retrieve all books from DB
+     *
+     * @return books
+     */
+    public ObservableList<Book> getBooks(){
+        return bookDAO.findAll();
+    }
+
+    /**
+     * Delete book from DB by id
+     *
+     * @param id the ID book
+     */
+    public void deleteBook(int id){
+        bookDAO.delete(id);
+    }
+
+    /**
      * Add Book 
      * @param isbn
      * @param title
@@ -155,5 +207,13 @@ public class Model {
      */
     public void addBook(String isbn, String title, String category, String description, int page_number, String publish_date, double price, int author) {
         bookDAO.create(isbn, title, category, description, page_number, publish_date, price, author);
+    }
+
+    /**
+     * Update existing book in the database
+     */
+
+    public void updateBook(Book book){
+        authorDAO.update(book);
     }
 }

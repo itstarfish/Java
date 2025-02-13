@@ -21,7 +21,7 @@ public interface genericDAO<T> {
      * @param id
      */
 
-    void delete(T id);
+    void delete(int id);
 
     /**
      * Find all entities by type
