@@ -15,15 +15,16 @@
     </properties>
 
     <dependencies>
+        <!-- Updated JavaFX version to 23.0.1 -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>17.0.6</version>
+            <version>23.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>17.0.6</version>
+            <version>23.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.xerial</groupId>
@@ -61,7 +62,6 @@
                 <version>0.0.8</version>
                 <executions>
                     <execution>
-                        <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>org.benedict.library/org.benedict.library.Application</mainClass>

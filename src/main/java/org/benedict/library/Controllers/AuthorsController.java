@@ -43,9 +43,9 @@ public class AuthorsController implements Initializable {
 
         //Data filtering
         filteredAuthors = new FilteredList<>(Model.getInstance().getAuthors());
-       authors_table.setItems(filteredAuthors);
+        authors_table.setItems(filteredAuthors);
 
-       filterButton.setOnAction(event -> applyFilters());
+        filterButton.setOnAction(event -> applyFilters());
     }
     /**
      * Open create author window
@@ -87,9 +87,10 @@ public class AuthorsController implements Initializable {
             );
             if (confirmed){
                 Model.getInstance().deleteAuthor(selectedAuthor.getId());
-                ObservableList<Author> authors = authors_table.getItems();
+                ObservableList<Author> authors = Model.getInstance().getAuthors();
                 authors.remove(selectedAuthor);
                 AlertUtility.displayInformation("Autorius pašalintas sėkmingai");
+                loadAuthorData();
             }
         }
 

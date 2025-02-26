@@ -23,20 +23,23 @@ public class CreateAuthorController implements Initializable {
 
     private void onAuthor() {
 
-        String fName = field_firstName.getText();
-        String lName = field_lastName.getText();
-        String email = field_email.getText();
-        String city = field_city.getText();
+        if (field_firstName.getText().isEmpty() || field_lastName.getText().isEmpty()||field_email.getText().isEmpty()||field_city.getText().isEmpty()){
+            AlertUtility.displayError("Visi laukai yra privalomi");
+        }else {
+            String fName = field_firstName.getText();
+            String lName = field_lastName.getText();
+            String email = field_email.getText();
+            String city = field_city.getText();
 
-        /**
-         * Create the author
-         */
-        Model.getInstance().createAuthor(fName,lName,email,city);
+            /**
+             * Create the author
+             */
+            Model.getInstance().createAuthor(fName, lName, email, city);
 
-        AlertUtility.displayInformation("Autorius sėkmingai sukurtas");
+            AlertUtility.displayInformation("Autorius sėkmingai sukurtas");
 
-        emptyFields();
-
+            emptyFields();
+        }
     }
 
     private void emptyFields(){

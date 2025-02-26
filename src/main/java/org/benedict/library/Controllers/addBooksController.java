@@ -1,12 +1,9 @@
 package org.benedict.library.Controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import org.benedict.library.Models.Author;
 import org.benedict.library.Models.Model;
 import org.benedict.library.Utilities.AlertUtility;
 
@@ -47,9 +44,33 @@ public class addBooksController implements Initializable {
             String title = field_Title.getText();
             String category = field_category.getText();
             String description = field_description.getText();
-            int page_number = Integer.parseInt(field_page_number.getText());
+
+            int page_number;
+            try {
+                page_number = Integer.parseInt(field_page_number.getText());
+                if (page_number <= 0) {
+                    AlertUtility.displayError("Puslapių skaičius turi būti teigiamas skaičius");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                AlertUtility.displayError("Puslapių skaičius turi būti teigiamas skaičius");
+                return;
+            }
+
             String publish_date = field_publish_date.getText();
-            double price = Double.parseDouble(field_price.getText());
+
+            double price;
+            try {
+                price = Double.parseDouble(field_price.getText());
+                if (price <= 0) {
+                    AlertUtility.displayError("Kaina turi būti teigiamas skaičius");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                AlertUtility.displayError("Kaina turi būti teigiamas skaičius");
+                return;
+            }
+
             int author = Integer.parseInt(field_author.getValue().toString());
 
             /**

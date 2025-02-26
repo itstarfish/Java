@@ -8,8 +8,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.benedict.library.Controllers.RouteController;
 
-import java.util.concurrent.ExecutionException;
-
 public class ViewFactory {
     private final ObjectProperty<MenuItems> userSelectedMenuItem;
     private AnchorPane dashboard;
@@ -81,12 +79,10 @@ public class ViewFactory {
      * @return authorsView
      */
     public AnchorPane getAuthorsView(){
-        if(authorsView == null){
-            try{
-                authorsView = new FXMLLoader(getClass().getResource("/Fxml/Authors.fxml")).load();
-            } catch (Exception e){
-                System.out.println(e);
-            }
+        try{
+            authorsView = new FXMLLoader(getClass().getResource("/Fxml/Authors.fxml")).load();
+        } catch (Exception e){
+            System.out.println(e);
         }
         return authorsView;
     }

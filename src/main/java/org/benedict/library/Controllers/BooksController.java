@@ -4,7 +4,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.benedict.library.Models.Author;
 import org.benedict.library.Models.Book;
 import org.benedict.library.Models.Model;
 import org.benedict.library.Utilities.AlertUtility;
@@ -87,9 +86,10 @@ public class BooksController implements Initializable {
             );
             if (confirmed){
                 Model.getInstance().deleteBook(selectedBook.getId());
-                ObservableList<Book> books = books_table.getItems();
+                ObservableList<Book> books = Model.getInstance().getBooks();
                 books.remove(selectedBook);
                 AlertUtility.displayInformation("Knyga pašalinta sėkmingai");
+                loadBooksData();
             }
         }
 
