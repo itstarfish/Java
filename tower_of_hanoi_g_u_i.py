@@ -4,8 +4,12 @@ import tkinter as tk
 import time
 from collections import deque
 
-
+"""
+    Ši klasė realizuoja Tower of Hanoi galvosūkių sprendimo grafinę sąsają (GUI) naudojant Tkinter biblioteką.
+    Leidžia vartotojui vizualiai stebėti galvosūkio sprendimus pagal pasirinktinus paieškos algoritmus.
+    """
 class TowerOfHanoiGUI:
+    # Inicializuoja Tower of Hanoi grafinę sąsają, nustato pradinę būseną, sukuria GUI elementus.
     def __init__(self, root, n_disks):
         self.root = root
         self.n_disks = n_disks  # Diskų skaičius
@@ -47,8 +51,8 @@ class TowerOfHanoiGUI:
         algorithm_menu = tk.OptionMenu(root, self.algorithm_var, *self.algorithms)
         algorithm_menu.pack(side="top")
 
+    """Sukurti stulpus (vietas, kur diskeliai gali būti sukrauti)."""
     def create_rods(self):
-        """Sukurti stulpus (vietas, kur diskeliai gali būti sukrauti)."""
         rod_width = 10
         rod_height = 200
         center_x = [150, 300, 450]  # Stulpų centrų X koordinatės
@@ -65,8 +69,8 @@ class TowerOfHanoiGUI:
             )
             self.rods.append(x)
 
+    """Sukuria grafinius diskus ir išdėsto juos ant pradinio stulpo pagal pradinę būseną."""
     def create_disks(self):
-        """Sukurti diskus ir juos išdėstyti pirmame stulpe."""
         ground_y = 350
         self.disk_ids = []  # Saugo grafinius diskų ID
         self.disk_text_ids = []  # Saugo tekstinius diskų dydžių žymenų ID
@@ -105,8 +109,8 @@ class TowerOfHanoiGUI:
             # Saugojame grafinio disko ID pagal šio disko dydį
             self.disk_size_to_graphical_id[size] = disk
 
+    """Atkurti pradinę būseną."""
     def reset(self):
-        """Atkurti pradinę būseną."""
         try:
             self.n_disks = int(self.disk_count_entry.get())  # Gauti pasirinktinį diskų skaičių
             if self.n_disks < 1:
@@ -122,8 +126,9 @@ class TowerOfHanoiGUI:
         self.create_rods()
         self.create_disks()
 
+    """Gylio paieškos (DFS) sprendimas Tower of Hanoi su GUI animacija."""
     def solve_hanoi_dfs(self):
-        """Gylio paieškos (DFS) sprendimas Tower of Hanoi su GUI animacija."""
+        
         self.move_count = 0
         self.move_label.config(text="Judėjimai: 0")
 
@@ -204,8 +209,9 @@ class TowerOfHanoiGUI:
         else:
             print("Sprendimas nerastas!")
 
+    """Plotinio paieškos (BFS) sprendimas Tower of Hanoi su GUI animacija."""
     def solve_hanoi_bfs(self):
-        """Plotinio paieškos (BFS) sprendimas Tower of Hanoi su GUI animacija."""
+        
         self.move_count = 0
         self.move_label.config(text="Judėjimai: 0")
         # Paverčiame pradinę būseną į tuple, kad ji būtų nekintama
@@ -296,8 +302,8 @@ class TowerOfHanoiGUI:
         else:
             print("Sprendimas nerastas!")
 
+    """Animuoti diskų judėjimą pagal sprendimo žingsnius."""
     def animate_solution(self):
-        """Animuoti diskų judėjimą pagal sprendimo žingsnius."""
         # Pirmiausia, atstatyti būseną ir GUI į pradinę būseną
         self.state = [[i for i in range(self.n_disks, 0, -1)], [], []]
         self.move_count = 0  # Atstatyti judesių skaičių
@@ -332,8 +338,8 @@ class TowerOfHanoiGUI:
 
         print(f"Animacija baigta! Galutinė būsena: {self.state}")
 
+    """Išspręsti Tower of Hanoi galvosūkį ir animuoti žingsnius pagal pasirinktą algoritmą."""
     def start_solution(self):
-        """Išspręsti Tower of Hanoi galvosūkį ir animuoti žingsnius pagal pasirinktą algoritmą."""
         self.solution = []  # Išvalyti seną sprendimą
 
         # Gauti pasirinktą algoritmą
@@ -346,6 +352,7 @@ class TowerOfHanoiGUI:
 
         # self.animate_solution()  # Animuoti sprendimo žingsnius
 
+    """Pagal vartotojo pasirinktą algoritmą (DFS arba BFS) pradeda problemos sprendimą."""
     def move_disk(self, source, target):
         ### print(f"Perkeliant diską iš Stulpo {source} į Stulpą {target}")
         ### print(f"Prieš judesį - Būsena: {self.state}")  # Derinimo tikslas: Išspausdinti būseną prieš judesį
@@ -413,8 +420,8 @@ class TowerOfHanoiGUI:
         # Pridėti mažą pauzę, kad judesys būtų matomas vizualiai
         time.sleep(0.2)  # Koreguokite miego laiką, kad kontroliuotumėte animacijos greitį
 
+    """Atnaujina grafinius diskų išdėstymus nurodytame stulpe."""
     def update_rod_positions(self, rod):
-        """Atnaujinti diskų pozicijas nurodytam stulpui."""
         rod_x = self.rods[rod]
         ground_y = 350  # Pagrindinė y koordinatė, kur yra stulpai
         disk_height = 20  # Kiekvieno disko aukštis
