@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Author {
+public class Reader {
     private IntegerProperty id;
     private StringProperty firstName;
     private StringProperty lastName;
@@ -13,15 +13,16 @@ public class Author {
     private StringProperty city;
 
     /**
-     * Author constructor
+     * Reader constructor
      *
-     * @param id -author id
-     * @param firstName - Author first name
-     * @param lastName - Author last name
-     * @param email - Author email
-     * @param city - Author city
+     * @param id - Reader id
+     * @param firstName - Reader first name
+     * @param lastName - Reader last name
+     * @param email - Reader email
+     * @param city - Reader city
      */
-    public Author(int id, String firstName, String lastName, String email, String city){
+
+    public Reader(int id, String firstName, String lastName, String email, String city){
         this.id = new SimpleIntegerProperty(id);
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);

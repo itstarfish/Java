@@ -6,6 +6,7 @@ import javafx.scene.layout.GridPane;
 import org.benedict.library.Models.Author;
 import org.benedict.library.Models.Book;
 import org.benedict.library.Models.Model;
+import org.benedict.library.Models.Reader;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -51,6 +52,7 @@ public class DialogUtility {
                 author.setLastName(lastNameField.getText().trim());
                 author.setEmail(emailField.getText().trim());
                 author.setCity(cityField.getText().trim());
+                return author;
             }
             return null;
         });
@@ -83,13 +85,12 @@ public class DialogUtility {
         TextField publishDateField = new TextField(book.getPublish_date());
         TextField priceField = new TextField(String.valueOf(book.getPrice()));
         ComboBox authorField = new ComboBox();
-        authorField.getItems().addAll(Model.getInstance().getAuthorIds());
+        authorField.getItems().addAll(Model.getInstance().getAuthors());
 
 
-        ArrayList<Integer> authorIds = Model.getInstance().getAuthorIds();
-        for (int i = 0; i < authorIds.size(); i++){
-            if (authorIds.get(i) == book.getAuthor()){
-                authorField.getSelectionModel().select(i);
+        for (Author author : Model.getInstance().getAuthors()) {
+            if (author.getId() == book.getAuthor().getId()) {
+                authorField.getSelectionModel().select(book.getAuthor());
                 break;
             }
         }
@@ -124,7 +125,8 @@ public class DialogUtility {
                 book.setPage_number(Integer.parseInt(pageNumberField.getText().trim()));
                 book.setPublish_date(publishDateField.getText().trim());
                 book.setPrice(Double.parseDouble(priceField.getText().trim()));
-                book.setAuthor(Integer.parseInt(authorField.getValue().toString()));
+                book.setAuthor((Author) authorField.getValue());
+                return book;
             }
             return null;
         });
@@ -133,4 +135,51 @@ public class DialogUtility {
     }
 
 
+    /**
+     * Displays dialog for editing Reader information
+     * @param reader - the Reader object for editing
+     */
+
+    public static Optional<Reader> showEditReaderDialog(Reader reader){
+        Dialog<Reader> dialog = new Dialog<>();
+        dialog.setTitle("Redaguoti skaitytoją");
+        dialog.setHeaderText("Redaguokite pasirinkto skaitytojo duomenis");
+
+        ButtonType saveButtonType = new ButtonType("Išsaugoti", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(saveButtonType,ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        TextField firstNameField = new TextField(reader.getFirstName());
+        TextField lastNameField = new TextField(reader.getLastName());
+        TextField emailField = new TextField(reader.getEmail());
+        TextField cityField = new TextField(reader.getCity());
+
+        grid.add(new Label("Vardas:"), 0,0);
+        grid.add(firstNameField,1,0);
+        grid.add(new Label("Pavardė"), 0,1);
+        grid.add(lastNameField,1,1);
+        grid.add(new Label("El. paštas:"),0,2);
+        grid.add(emailField,1,2);
+        grid.add(new Label("Miestas:"),0,3);
+        grid.add(cityField,1,3);
+
+
+        dialog.getDialogPane().setContent(grid);
+
+        dialog.setResultConverter(dialogButton ->{
+            if (dialogButton == saveButtonType){
+                reader.setFirstName(firstNameField.getText().trim());
+                reader.setLastName(lastNameField.getText().trim());
+                reader.setEmail(emailField.getText().trim());
+                reader.setCity(cityField.getText().trim());
+                return reader;
+            }
+            return null;
+        });
+
+        return dialog.showAndWait();
+    }
 }

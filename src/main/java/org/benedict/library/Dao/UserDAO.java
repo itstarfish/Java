@@ -1,9 +1,8 @@
-package org.benedict.library.dao;
+package org.benedict.library.Dao;
 
 import org.benedict.library.Models.User;
 import org.benedict.library.Utilities.UserUtility;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.logging.Logger;

@@ -38,7 +38,6 @@ public class AuthorsController implements Initializable {
         loadAuthorData();
         remove_author.setOnAction(event -> onRemoveAuthor());
 
-
         setRowFactoryForAuthorsTable();
 
         //Data filtering

@@ -15,6 +15,10 @@ public class ViewFactory {
     private AnchorPane createAuthorView;
     private AnchorPane booksView;
     private AnchorPane addBookView;
+    private AnchorPane readersView;
+    private AnchorPane addReaderView;
+    private AnchorPane newBookLoanView;
+    private AnchorPane bookLoansView;
 
     public ViewFactory(){
         this.userSelectedMenuItem = new SimpleObjectProperty<>();
@@ -108,13 +112,11 @@ public class ViewFactory {
      * @return booksView
      */
     public AnchorPane getBooksView(){
-        if(booksView == null){
             try{
                 booksView = new FXMLLoader(getClass().getResource("/Fxml/Books.fxml")).load();
-            } catch (Exception e){
+            } catch (Exception e) {
                 System.out.println(e);
             }
-        }
         return booksView;
     }
 
@@ -134,6 +136,65 @@ public class ViewFactory {
         return addBookView;
     }
 
+    /**
+     * Load and return readers view
+     *
+     * @return readersView
+     */
+    public AnchorPane getReadersView(){
+        try{
+            readersView = new FXMLLoader(getClass().getResource("/Fxml/Readers.fxml")).load();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return readersView;
+    }
+
+    /**
+     * Load and return add Reader View
+     *
+     * @return addReaderView
+     */
+    public AnchorPane getAddReaderView(){
+        if(addReaderView == null){
+            try{
+                addReaderView = new FXMLLoader(getClass().getResource("/Fxml/AddReader.fxml")).load();
+            } catch (Exception e){
+                System.out.println(e);
+            }
+        }
+        return addReaderView;
+    }
+
+    /**
+     * Load and return book Loans View
+     *
+     * @return bookLoansView
+     */
+    public AnchorPane getBookLoansView(){
+        try{
+            bookLoansView = new FXMLLoader(getClass().getResource("/Fxml/BookLoans.fxml")).load();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return bookLoansView;
+    }
+
+    /**
+     * Load and return new Book Loan View
+     *
+     * @return newBookLoanView
+     */
+    public AnchorPane getNewBookLoanView(){
+        if(newBookLoanView == null){
+            try{
+                newBookLoanView = new FXMLLoader(getClass().getResource("/Fxml/NewBookLoanView.fxml")).load();
+            } catch (Exception e){
+                System.out.println(e);
+            }
+        }
+        return newBookLoanView;
+    }
 
     /*
     * Create and display  new stage.

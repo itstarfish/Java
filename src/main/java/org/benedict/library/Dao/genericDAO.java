@@ -1,4 +1,4 @@
-package org.benedict.library.dao;
+package org.benedict.library.Dao;
 
 import java.util.List;
 

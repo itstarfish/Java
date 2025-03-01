@@ -1,4 +1,4 @@
-package org.benedict.library.dao;
+package org.benedict.library.Dao;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

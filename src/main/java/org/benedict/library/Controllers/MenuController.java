@@ -17,6 +17,8 @@ public class MenuController implements Initializable {
     public Text current_user_text;
     public Button authors_btn;
     public Button books_btn;
+    public Button readers_btn;
+    public Button bookLoans_btn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -35,6 +37,8 @@ public class MenuController implements Initializable {
         logout_btn.setOnAction(event -> onLogout());
         authors_btn.setOnAction(event -> onAuthors());
         books_btn.setOnAction(event -> onBooks());
+        readers_btn.setOnAction(event -> onReaders());
+        bookLoans_btn.setOnAction(event -> onBookLoans());
 
     }
     /**
@@ -53,6 +57,24 @@ public class MenuController implements Initializable {
     public void onBooks(){
         //Navigate to Books window
         Model.getInstance().getViewFactory().getUserSelectedMenuItem().set(MenuItems.BOOKS);
+    }
+
+    /**
+     * Handle Readers window
+     */
+
+    public void onReaders(){
+        //Navigate to Books window
+        Model.getInstance().getViewFactory().getUserSelectedMenuItem().set(MenuItems.READERS);
+    }
+
+    /**
+     * Handle Book Loans window
+     */
+
+    public void onBookLoans(){
+        //Navigate to Books window
+        Model.getInstance().getViewFactory().getUserSelectedMenuItem().set(MenuItems.BOOK_LOANS);
     }
 
 

@@ -5,7 +5,7 @@ import javafx.beans.property.*;
 public class Book {
 
     private IntegerProperty id;
-    private IntegerProperty author;
+    private ObjectProperty<Author> author;
     private DoubleProperty price;
     private StringProperty publish_date;
     private IntegerProperty page_number;
@@ -26,7 +26,7 @@ public class Book {
      * @param price
      * @param author
      */
-    public Book(int id, String isbn, String title, String category, String description, int page_number, String publish_date, double price, int author){
+    public Book(int id, String isbn, String title, String category, String description, int page_number, String publish_date, double price, Author author){
         this.id = new SimpleIntegerProperty(id);
         this.isbn = new SimpleStringProperty(isbn);
         this.title = new SimpleStringProperty(title);
@@ -35,7 +35,9 @@ public class Book {
         this.page_number = new SimpleIntegerProperty(page_number);
         this.publish_date = new SimpleStringProperty(publish_date);
         this.price = new SimpleDoubleProperty(price);
-        this.author = new SimpleIntegerProperty(author);
+        this.author = new SimpleObjectProperty<>();
+        this.author.set(author);
+
     }
 
 
@@ -51,16 +53,15 @@ public class Book {
         this.id.set(id);
     }
 
-    public int getAuthor() {
+    public Author getAuthor() {
         return author.get();
     }
 
-    public IntegerProperty authorProperty() {
-        return author;
-    }
-
-    public void setAuthor(int author) {
+    public void setAuthor(Author author) {
         this.author.set(author);
+    }
+    public ObjectProperty<Author> authorProperty() {
+        return author;
     }
 
     public double getPrice() {

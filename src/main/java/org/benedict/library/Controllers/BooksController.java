@@ -1,6 +1,7 @@
 package org.benedict.library.Controllers;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,6 +28,12 @@ public class BooksController implements Initializable {
     public TableColumn col_price;
     public TableColumn col_author;
     public MenuItem remove_book;
+    public TextField filterISBN;
+    public TextField filterAuthor;
+    public TextField filterTitle;
+    public Button filterButton;
+
+    private FilteredList<Book> filteredBooks;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -35,9 +42,15 @@ public class BooksController implements Initializable {
         loadBooksData();
         remove_book.setOnAction(event -> onRemoveBook());
         setRowFactoryForBooksTable();
+
+        //Data filtering
+        filteredBooks = new FilteredList<>(Model.getInstance().getBooks());
+        books_table.setItems(filteredBooks);
+
+        filterButton.setOnAction(event -> applyFilters());
     }
 
-    /**
+   /**
      * Open add book window
      */
     public void onAddBook(){
@@ -125,6 +138,29 @@ public class BooksController implements Initializable {
         result.ifPresent(updatedBook ->{
             Model.getInstance().updateBook(updatedBook);
             loadBooksData();
+        });
+    }
+
+    /**
+     * Authors data filter
+     */
+
+    private void applyFilters(){
+        String ISBNFilter = filterISBN.getText().toLowerCase();
+        String AuthorFilter = filterAuthor.getText().toLowerCase();
+        String TitleFilter = filterTitle.getText().toLowerCase();
+
+        filteredBooks.setPredicate(book -> {
+            if (!ISBNFilter.isEmpty() && !(book.getIsbn().toLowerCase().contains(ISBNFilter))) {
+                return false;
+            }
+            if (!AuthorFilter.isEmpty() && !(book.getAuthor().getFirstNameLastName().toLowerCase().contains(AuthorFilter))){
+                return false;
+            }
+            if(!TitleFilter.isEmpty() && !(book.getTitle().toLowerCase().contains(TitleFilter))){
+                return false;
+            }
+            return true;
         });
     }
 }

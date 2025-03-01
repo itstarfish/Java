@@ -25,6 +25,18 @@ public class RouteController implements Initializable {
                 case ADD_BOOK:
                     parent.setCenter(Model.getInstance().getViewFactory().getAddBookView());
                     break;
+                case READERS:
+                    parent.setCenter(Model.getInstance().getViewFactory().getReadersView());
+                    break;
+                case ADD_READER:
+                    parent.setCenter(Model.getInstance().getViewFactory().getAddReaderView());
+                    break;
+                case BOOK_LOANS:
+                    parent.setCenter(Model.getInstance().getViewFactory().getBookLoansView());
+                    break;
+                case NEW_BOOK_LOAN:
+                    parent.setCenter(Model.getInstance().getViewFactory().getNewBookLoanView());
+                    break;
                 default:
                     parent.setCenter(Model.getInstance().getViewFactory().getDashboardView());
             }

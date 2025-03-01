@@ -1,16 +1,14 @@
 package org.benedict.library.Models;
 
 import javafx.collections.ObservableList;
+import org.benedict.library.Dao.ReaderDAO;
 import org.benedict.library.Views.ViewFactory;
-import org.benedict.library.dao.AuthorDAO;
-import org.benedict.library.dao.BookDAO;
-import org.benedict.library.dao.UserDAO;
+import org.benedict.library.Dao.AuthorDAO;
+import org.benedict.library.Dao.BookDAO;
+import org.benedict.library.Dao.UserDAO;
 
-import javax.swing.text.View;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 
 public class Model {
     private static Model model; //Singleton instance
@@ -20,6 +18,7 @@ public class Model {
     private boolean loginSuccessFlag;
     private User currentUser;
     public final AuthorDAO authorDAO;
+    private final ReaderDAO readerDAO;
 
     private Model(){
         this.viewFactory = new ViewFactory();
@@ -27,6 +26,7 @@ public class Model {
         this.currentUser = null;
         this.authorDAO = new AuthorDAO(new DatabaseDriver().getConnection());
         this.bookDAO = new BookDAO(new DatabaseDriver().getConnection());
+        this.readerDAO = new ReaderDAO(new DatabaseDriver().getConnection());
     }
 
     /*
@@ -145,16 +145,17 @@ public class Model {
     }
 
     /**
-     * Retrieve all author ids from DB
+     * Retrieve author by id DB
      *
-     * @return arraylist with author ids
+     * @return author
      */
-    public ArrayList<Integer> getAuthorIds(){
-        ArrayList<Integer> authorIds = new ArrayList<>();
+    public Author getAuthorById(int id){
         for (Author author:getAuthors()) {
-            authorIds.add(author.getId());
+            if (author.getId() == id) {
+                return author;
+            }
         }
-        return authorIds;
+        return null;
     }
 
 
@@ -205,7 +206,7 @@ public class Model {
      * @param price
      * @param author
      */
-    public void addBook(String isbn, String title, String category, String description, int page_number, String publish_date, double price, int author) {
+    public void addBook(String isbn, String title, String category, String description, int page_number, String publish_date, double price, Author author) {
         bookDAO.create(isbn, title, category, description, page_number, publish_date, price, author);
     }
 
@@ -214,6 +215,32 @@ public class Model {
      */
 
     public void updateBook(Book book){
-        authorDAO.update(book);
+        bookDAO.update(book);
+    }
+
+    /**
+     * Retrieve all readers from DB
+     *
+     * @return readers
+     */
+    public ObservableList<Reader> getReaders(){
+        return readerDAO.findAll();
+    }
+
+    /**
+     * Update existing reader in the database
+     */
+
+    public void updateReader(Reader reader){
+        readerDAO.update(reader);
+    }
+
+
+    /**
+     * Create reader
+     */
+
+    public void createReader(String firstName, String lastName, String email, String city){
+        readerDAO.create(firstName,lastName,email,city);
     }
 }

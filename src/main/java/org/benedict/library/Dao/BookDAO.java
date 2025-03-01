@@ -1,4 +1,4 @@
-package org.benedict.library.dao;
+package org.benedict.library.Dao;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,7 +21,7 @@ public class BookDAO implements genericDAO{
         return null;
     }
 
-    public void create(String isbn, String title, String category, String description, int page_number, String publish_date, Double price, int author){
+    public void create(String isbn, String title, String category, String description, int page_number, String publish_date, Double price, Author author){
         String sql = "INSERT INTO Books(ISBN, Title, Category, Description, Page_Number, Publish_Date, Price, Author) VALUES(?,?,?,?,?,?,?,?)";
         int userId = Model.getInstance().getLoggedUserId();
 
@@ -33,7 +33,7 @@ public class BookDAO implements genericDAO{
             stmt.setInt(5, page_number);
             stmt.setString(6, publish_date);
             stmt.setDouble(7, price);
-            stmt.setInt(8, author);
+            stmt.setInt(8, author.getId());
 
             stmt.executeUpdate();
 
@@ -61,7 +61,7 @@ public class BookDAO implements genericDAO{
             stmt.setInt(5, book.getPage_number());
             stmt.setString(6, book.getPublish_date());
             stmt.setDouble(7, book.getPrice());
-            stmt.setInt(8, book.getAuthor());
+            stmt.setInt(8, book.getAuthor().getId());
             stmt.setInt(9, book.getId());
 
             int rowsUpdated = stmt.executeUpdate();
@@ -109,7 +109,7 @@ public class BookDAO implements genericDAO{
                 int page_number = resultSet.getInt("Page_Number");
                 String publish_date = resultSet.getString("Publish_Date");
                 Double price = resultSet.getDouble("Price");
-                int author = resultSet.getInt("Author");
+                Author author = Model.getInstance().getAuthorById(resultSet.getInt("Author"));
 
                 Book book = new Book(id, isbn, title, category, description, page_number, publish_date, price, author);
                 books.add(book);

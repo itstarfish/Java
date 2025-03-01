@@ -4,6 +4,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import org.benedict.library.Models.Author;
 import org.benedict.library.Models.Model;
 import org.benedict.library.Utilities.AlertUtility;
 
@@ -23,7 +24,7 @@ public class addBooksController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        field_author.getItems().addAll(Model.getInstance().getAuthorIds());
+        field_author.getItems().addAll(Model.getInstance().getAuthors());
         add_book_btn.setOnAction(event -> onBook());
 
     }
@@ -70,14 +71,13 @@ public class addBooksController implements Initializable {
                 AlertUtility.displayError("Kaina turi būti teigiamas skaičius");
                 return;
             }
-
-            int author = Integer.parseInt(field_author.getValue().toString());
+            Author selectedAuthor = (Author) field_author.getValue();
 
             /**
              * Create the book
              */
 
-            Model.getInstance().addBook(ISBN, title, category, description, page_number, publish_date, price, author);
+            Model.getInstance().addBook(ISBN, title, category, description, page_number, publish_date, price, selectedAuthor);
 
             AlertUtility.displayInformation("Knyga sėkmingai pridėta");
 
