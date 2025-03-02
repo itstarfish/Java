@@ -126,12 +126,10 @@ public class ViewFactory {
      * @return addBookView
      */
     public AnchorPane getAddBookView(){
-        if(addBookView == null){
-            try{
-                addBookView = new FXMLLoader(getClass().getResource("/Fxml/AddBook.fxml")).load();
-            } catch (Exception e){
-                System.out.println(e);
-            }
+        try{
+            addBookView = new FXMLLoader(getClass().getResource("/Fxml/AddBook.fxml")).load();
+        } catch (Exception e){
+            System.out.println(e);
         }
         return addBookView;
     }
@@ -186,12 +184,10 @@ public class ViewFactory {
      * @return newBookLoanView
      */
     public AnchorPane getNewBookLoanView(){
-        if(newBookLoanView == null){
-            try{
-                newBookLoanView = new FXMLLoader(getClass().getResource("/Fxml/NewBookLoanView.fxml")).load();
-            } catch (Exception e){
-                System.out.println(e);
-            }
+        try{
+            newBookLoanView = new FXMLLoader(getClass().getResource("/Fxml/LoanBook.fxml")).load();
+        } catch (Exception e){
+            System.out.println(e);
         }
         return newBookLoanView;
     }

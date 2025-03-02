@@ -11,7 +11,7 @@ import org.benedict.library.Utilities.AlertUtility;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class addBooksController implements Initializable {
+public class AddBookController implements Initializable {
     public TextField field_ISBN;
     public TextField field_Title;
     public TextField field_category;

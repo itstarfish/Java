@@ -1,11 +1,8 @@
 package org.benedict.library.Models;
 
 import javafx.collections.ObservableList;
-import org.benedict.library.Dao.ReaderDAO;
+import org.benedict.library.Dao.*;
 import org.benedict.library.Views.ViewFactory;
-import org.benedict.library.Dao.AuthorDAO;
-import org.benedict.library.Dao.BookDAO;
-import org.benedict.library.Dao.UserDAO;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,6 +16,7 @@ public class Model {
     private User currentUser;
     public final AuthorDAO authorDAO;
     private final ReaderDAO readerDAO;
+    private final BookLoanDAO bookLoanDAO;
 
     private Model(){
         this.viewFactory = new ViewFactory();
@@ -27,6 +25,7 @@ public class Model {
         this.authorDAO = new AuthorDAO(new DatabaseDriver().getConnection());
         this.bookDAO = new BookDAO(new DatabaseDriver().getConnection());
         this.readerDAO = new ReaderDAO(new DatabaseDriver().getConnection());
+        this.bookLoanDAO = new BookLoanDAO(new DatabaseDriver().getConnection());
     }
 
     /*
@@ -242,5 +241,110 @@ public class Model {
 
     public void createReader(String firstName, String lastName, String email, String city){
         readerDAO.create(firstName,lastName,email,city);
+    }
+
+    /**
+     * Delete reader from DB by id
+     *
+     * @param id the ID reader
+     */
+    public void deleteReader(int id){
+        readerDAO.delete(id);
+    }
+
+    /**
+     * Retrieve all book loans from DB
+     *
+     * @return bookLoans
+     */
+    public ObservableList<BookLoan> getBookLoans() { return bookLoanDAO.findAll();
+    }
+
+    /**
+     * Update existing reader in the database
+     */
+
+    public void updateBookLoan(BookLoan bookLoan){
+        bookLoanDAO.update(bookLoan);
+    }
+
+
+    /**
+     * Create reader
+     */
+
+    public void createBookLoan(Book book, Reader reader, LocalDate loanDate, LocalDate returnDate, String status){
+        bookLoanDAO.create(book, reader, loanDate, returnDate, status);
+    }
+
+    /**
+     * Delete bookLoan from DB by id
+     *
+     * @param id the ID bookLoan
+     */
+    public void deleteBookLoan(int id){
+        bookLoanDAO.delete(id);
+    }
+
+
+    /**
+     * Retrieve book by id DB
+     *
+     * @return book
+     */
+    public Book getBookById(int id){
+        for (Book book:getBooks()) {
+            if (book.getId() == id) {
+                return book;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Retrieve reader by id DB
+     *
+     * @return reader
+     */
+    public Reader getReaderById(int id){
+        for (Reader reader:getReaders()) {
+            if (reader.getId() == id) {
+                return reader;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Retrieve book loan by id DB
+     *
+     * @return bookloan
+     */
+    public BookLoan getBookLoanById(int id){
+        for (BookLoan bookLoan:getBookLoans()) {
+            if (bookLoan.getId() == id) {
+                return bookLoan;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Check if book to loan is not loaned already
+     *
+     * @return boolean
+     */
+    public boolean isBookLoaned(Book selectedBook) {
+        for (BookLoan bookLoan:getBookLoans()) {
+            if (bookLoan.getBook().getId() == selectedBook.getId() && bookLoan.getReturnStatus().equals("Paimta")) {
+                System.out.println("Knyga jau išduota ir negražinta");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void returnBook (BookLoan bookLoan){
+        bookLoanDAO.returnBook(bookLoan);
     }
 }

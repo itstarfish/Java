@@ -40,10 +40,6 @@ public class AuthorsController implements Initializable {
 
         setRowFactoryForAuthorsTable();
 
-        //Data filtering
-        filteredAuthors = new FilteredList<>(Model.getInstance().getAuthors());
-        authors_table.setItems(filteredAuthors);
-
         filterButton.setOnAction(event -> applyFilters());
     }
     /**
@@ -70,7 +66,8 @@ public class AuthorsController implements Initializable {
 
     private void loadAuthorData(){
         ObservableList<Author> authors = Model.getInstance().getAuthors();
-        authors_table.setItems(authors);
+        filteredAuthors = new FilteredList<>(authors);
+        authors_table.setItems(filteredAuthors);
     }
 
     /**

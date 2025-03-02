@@ -43,10 +43,6 @@ public class BooksController implements Initializable {
         remove_book.setOnAction(event -> onRemoveBook());
         setRowFactoryForBooksTable();
 
-        //Data filtering
-        filteredBooks = new FilteredList<>(Model.getInstance().getBooks());
-        books_table.setItems(filteredBooks);
-
         filterButton.setOnAction(event -> applyFilters());
     }
 
@@ -83,7 +79,8 @@ public class BooksController implements Initializable {
 
     private void loadBooksData(){
         ObservableList<Book> books = Model.getInstance().getBooks();
-        books_table.setItems(books);
+        filteredBooks = new FilteredList<>(books);
+        books_table.setItems(filteredBooks);
     }
 
     /**

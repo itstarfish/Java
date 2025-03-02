@@ -150,6 +150,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return String.format("Book [ISBN=%s, Title=%s, Category=%s, Description=%s, Page Number=%s, Publish date=%s, Price=%s, Author=%s]",getIsbn(),getTitle(),getCategory(),getDescription(),getPage_number(),getPublish_date(),getPrice(),getAuthor());
+        return String.format("%s, %s, by %s",getTitle(),getPublish_date(),getAuthor());
     }
 }

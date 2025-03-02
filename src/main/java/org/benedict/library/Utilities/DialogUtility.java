@@ -3,11 +3,10 @@ package org.benedict.library.Utilities;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import org.benedict.library.Models.Author;
-import org.benedict.library.Models.Book;
-import org.benedict.library.Models.Model;
-import org.benedict.library.Models.Reader;
+import org.benedict.library.Controllers.BookLoanStatus;
+import org.benedict.library.Models.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -157,6 +156,7 @@ public class DialogUtility {
         TextField emailField = new TextField(reader.getEmail());
         TextField cityField = new TextField(reader.getCity());
 
+
         grid.add(new Label("Vardas:"), 0,0);
         grid.add(firstNameField,1,0);
         grid.add(new Label("Pavardė"), 0,1);
@@ -180,6 +180,117 @@ public class DialogUtility {
             return null;
         });
 
+        return dialog.showAndWait();
+    }
+
+    /**
+     * Displays dialog for editing BookLoan information
+     * @param bookLoan - the BookLoan object for editing
+     */
+
+    public static Optional<BookLoan> showEditBookLoanDialog(BookLoan bookLoan) {
+        Dialog<BookLoan> dialog = new Dialog<>();
+        dialog.setTitle("Redaguoti knygos išdavimą");
+        dialog.setHeaderText("Redaguokite pasirinktos knygos išdavimo duomenis");
+
+        ButtonType saveButtonType = new ButtonType("Išsaugoti", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(saveButtonType,ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        
+        ComboBox bookField = new ComboBox();
+        bookField.getItems().addAll(Model.getInstance().getBooks());
+
+
+        for (Book book : Model.getInstance().getBooks()) {
+            if (book.getId() == bookLoan.getBook().getId()) {
+                bookField.getSelectionModel().select(bookLoan.getBook());
+                break;
+            }
+        }
+
+        ComboBox readerField = new ComboBox();
+        readerField.getItems().addAll(Model.getInstance().getReaders());
+
+
+        for (Reader reader : Model.getInstance().getReaders()) {
+            if (reader.getId() == bookLoan.getReader().getId()) {
+                readerField.getSelectionModel().select(bookLoan.getReader());
+                break;
+            }
+        }
+
+        DatePicker loanDate = new DatePicker(bookLoan.getLoanDate());
+        DatePicker returnDate = new DatePicker(bookLoan.getReturnDate());
+        
+        ComboBox statusField = new ComboBox();
+        statusField.getItems().addAll(BookLoanStatus.TAKEN.getLabel(),BookLoanStatus.RETURNED.getLabel());
+        statusField.getSelectionModel().select(bookLoan.getReturnStatus());
+
+
+        grid.add(new Label("Knyga:"), 0, 0);
+        grid.add(bookField, 1, 0);
+        grid.add(new Label("Skaitytojas"), 0, 1);
+        grid.add(readerField, 1, 1);
+        grid.add(new Label("Išdavimo data:"), 0, 2);
+        grid.add(loanDate, 1, 2);
+        grid.add(new Label("Grąžinimo data:"), 0, 3);
+        grid.add(returnDate, 1, 3);
+        grid.add(new Label("Išdavimo būsena:"), 0, 4);
+        grid.add(statusField, 1, 4);
+
+
+        dialog.getDialogPane().setContent(grid);
+
+        dialog.setResultConverter(dialogButton ->{
+            if (dialogButton == saveButtonType){
+                bookLoan.setBook((Book) bookField.getValue());
+                bookLoan.setReader((Reader) readerField.getValue());
+                bookLoan.setLoanDate(loanDate.getValue());
+                bookLoan.setReturnDate(returnDate.getValue());
+                bookLoan.setReturnStatus((String) statusField.getValue());
+                return bookLoan;
+            }
+            return null;
+        });
+        return dialog.showAndWait();
+    }
+
+    /**
+     * Displays dialog for returning Book
+     * @param bookLoan - the BookLoan object for editing
+     */
+
+    public static Optional<BookLoan> showReturnBookDialog(BookLoan bookLoan) {
+        Dialog<BookLoan> dialog = new Dialog<>();
+        dialog.setTitle("Registruoti knygos grąžinimą");
+        dialog.setHeaderText("Nurodykite knygos gražinimo datą.");
+
+        ButtonType saveButtonType = new ButtonType("Išsaugoti", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(saveButtonType,ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        DatePicker returnDate = new DatePicker(LocalDate.now());
+        grid.add(new Label("Knyga: " + bookLoan.getBook()), 0, 0);
+        grid.add(new Label("Grąžinimo data:"), 0, 1);
+        grid.add(returnDate, 1, 1);
+
+        dialog.getDialogPane().setContent(grid);
+
+        dialog.setResultConverter(dialogButton ->{
+            if (dialogButton == saveButtonType){
+                bookLoan.setReturnDate(returnDate.getValue());
+                bookLoan.setReturnStatus(BookLoanStatus.RETURNED.getLabel());
+                return bookLoan;
+            }
+            return null;
+        });
         return dialog.showAndWait();
     }
 }
