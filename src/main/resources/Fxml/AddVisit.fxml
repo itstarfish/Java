@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0"
+            prefWidth="860.0" styleClass="create_customer_container" stylesheets="@../Styles/AddStyle.css"
+            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.benedict.massage.Controllers.AddVisitController">
+    <children>
+        <Text layoutX="364.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Naujo vizito priskyrimas klientui" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0"/>
+        <VBox layoutX="21.0" layoutY="46.0" prefHeight="500.0" prefWidth="272.0" AnchorPane.leftAnchor="14.0"
+              AnchorPane.rightAnchor="574.0" AnchorPane.topAnchor="40.0">
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Klientas"/>
+                <ComboBox fx:id="field_customer" prefHeight="25.0" prefWidth="251.0"/>
+                <Text layoutX="21.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vizito data"/>
+                <DatePicker fx:id="field_visit_date" prefHeight="25.0" prefWidth="154.0" showWeekNumbers="false"
+                            styleClass="default-datepicker" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pradžios laikas"/>
+                <HBox spacing="5">
+                    <Spinner fx:id="startHoursSpinner" prefWidth="70"/>
+                    <Label text=":"/>
+                    <Spinner fx:id="startMinutesSpinner" prefWidth="70"/>
+                </HBox>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pabaigos Laikas"/>
+                <HBox spacing="5">
+                    <Spinner fx:id="finishHoursSpinner" prefWidth="70"/>
+                    <Label text=":"/>
+                    <Spinner fx:id="finishMinutesSpinner" prefWidth="70"/>
+                </HBox>
+
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Detalės apie vizitą"/>
+                <TextArea fx:id="field_visit_details" prefHeight="100.0" prefWidth="251.0" wrapText="true"/>
+                <Button fx:id="add_visit_btn" mnemonicParsing="false" text="Pridėti vizitą"/>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

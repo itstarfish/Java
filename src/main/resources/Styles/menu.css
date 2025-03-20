@@ -1,57 +1,56 @@
-.main_menu_container{
-    -fx-background-color: #eee;
+.main_menu_container {
+    -fx-background-color: #f5f5dc;
     -fx-alignment: center;
     -fx-padding: 0 10 0 10;
 }
 
-.left_container{
-    -fx-background-color: #fff;
+.left_container {
+    -fx-background-color: #faf0e6;
     -fx-background-radius: 10;
-    -fx-effect:  dropshadow(two-pass-box, #aaa, 5, 0, 0, 4);
+    -fx-effect: dropshadow(two-pass-box, #bbb, 5, 0, 0, 4);
 }
 
 /* Logo section */
 
-.title_container{
-    -fx-background-color: #FFF;
+.title_container {
+    -fx-background-color: #fff8dc;
     -fx-background-radius: 20, 20, 0, 0;
     -fx-alignment: top_center;
     -fx-padding: 10;
 }
 
-.title_container Text{
-    -fx-fill: #000;
+.title_container Text {
+    -fx-fill: #6b4226;
     -fx-font-size: 2em;
 }
 
 
 /* Navigation section */
 
-.navigation_container{
+.navigation_container {
     -fx-padding: 10 10 10 20;
     -fx-spacing: 20;
 }
 
-.navigation_container Button{
+.navigation_container Button {
     -fx-pref-width: 150;
     -fx-pref-height: 40;
-    -fx-background-color: #fff;
-    -fx-text-fill: #132a13;
+    -fx-background-color: #faf0e6;
+    -fx-text-fill: #6b4226;
     -fx-font-size: 1.1em;
     -fx-alignment: center_left;
-    -fx-effect: dropshadow(three-pass-box, #ddd, 5,0,0,6);
+    -fx-effect: dropshadow(three-pass-box, #ccc, 5, 0, 0, 6);
 }
 
-.navigation_container Button:hover{
+.navigation_container Button:hover {
     -fx-cursor: hand;
 }
 
-.alt_navigation_button{
+.alt_navigation_button {
     -fx-pref-width: 150;
     -fx-pref-height: 40;
-    -fx-background-color: #132a13;
+    -fx-background-color: #6b4226;
     -fx-text-fill: #fff;
     -fx-font-size: 1.1em;
     -fx-alignment: center_left;
-
 }

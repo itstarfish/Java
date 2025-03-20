@@ -9,10 +9,10 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
             prefWidth="600.0" stylesheets="@../Styles/login.css" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.benedict.library.Controllers.LoginController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.benedict.massage.Controllers.LoginController">
    <VBox prefHeight="400.0" prefWidth="200.0" styleClass="login_logo_container">
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="KITM"/>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Knygynas"/>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Masažo"/>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Salonas"/>
    </VBox>
    <VBox layoutX="224.0" layoutY="50.0" prefHeight="352.0" prefWidth="350.0" styleClass="login_form_container"
          AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">

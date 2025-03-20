@@ -7,15 +7,12 @@
     <groupId>org.benedict</groupId>
     <artifactId>library</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>KITM library</name>
-
+    <name>Massage</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.10.2</junit.version>
     </properties>
-
     <dependencies>
-        <!-- Updated JavaFX version to 23.0.1 -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -24,7 +21,7 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.4.11</version> <!-- Use the latest version -->
+            <version>1.4.11</version>
         </dependency>
 
         <dependency>
@@ -70,7 +67,7 @@
                     <execution>
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>org.benedict.library/org.benedict.library.Application</mainClass>
+                            <mainClass>org.benedict.library/org.benedict.massage.Application</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

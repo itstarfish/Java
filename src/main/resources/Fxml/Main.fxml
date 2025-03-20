@@ -13,6 +13,6 @@
         <fx:include source="Menu.fxml" />
     </left>
     <center>
-        <fx:include source="Dashboard.fxml" />
+        <fx:include source="Visits.fxml" />
     </center>
 </BorderPane>

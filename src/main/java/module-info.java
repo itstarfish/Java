@@ -1,13 +1,13 @@
-module org.benedict.library {
+module org.benedict.massage {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
     requires java.sql;
 
+    opens org.benedict.massage.Controllers to javafx.fxml;
 
-    opens org.benedict.library to javafx.fxml;
-    exports org.benedict.library;
-    exports org.benedict.library.Controllers;
-    exports org.benedict.library.Models;
-    exports org.benedict.library.Views;
+    exports org.benedict.massage;
+    exports org.benedict.massage.Controllers;
+    exports org.benedict.massage.Models;
+    exports org.benedict.massage.Views;
 }

@@ -1,0 +1,52 @@
+.create_customer_container {
+    -fx-background-color: #FAF3E0;
+}
+
+.create_customer_container Text {
+    -fx-font-size: 1.2em;
+    -fx-fill: #6B4F4F;
+}
+
+.default-datepicker {
+    -fx-pref-width: 200;
+}
+
+.create_customer_container VBox {
+    -fx-border-width: 0 0 0 1;
+    -fx-border-color: #D9C2A5;
+    -fx-padding: 10;
+    -fx-spacing: 12;
+}
+
+.create_customer_container TextField, PasswordField {
+    -fx-pref-width: 250;
+    -fx-pref-height: 35;
+    -fx-background-color: #FFFFFF;
+    -fx-font-size: 1.3em;
+    -fx-effect: dropshadow(three-pass-box, #C4A484, 3, 0, 0, 3);
+}
+
+.payee_address_lbl {
+    -fx-pref-width: 250;
+    -fx-pref-height: 30;
+    -fx-padding: 5;
+    -fx-background-color: #6B4F4F;
+    -fx-background-radius: 5;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 1.3em;
+    -fx-effect: dropshadow(three-pass-box, #D9C2A5, 3, 0, 0, 3);
+}
+
+.create_customer_container Button {
+    -fx-background-color: linear-gradient(to right, #8C6254, #C58967);
+    -fx-effect: dropshadow(three-pass-box, #C4A484, 3, 0, 0, 3);
+    -fx-pref-width: 250;
+    -fx-font-size: 1.5em;
+    -fx-font-family: "Calibri Light";
+    -fx-text-fill: #FFFFFF;
+}
+
+.create_customer_container Button:hover {
+    -fx-cursor: hand;
+    -fx-background-color: linear-gradient(to right, #7A543B, #B7795C);
+}
